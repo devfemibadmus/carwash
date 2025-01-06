@@ -1,0 +1,4 @@
+flask
+stripe
+functions-framework
+google-cloud-firestore

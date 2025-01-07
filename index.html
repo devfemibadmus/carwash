@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Turbo - Car Wash Free Bootstrap5 HTML Website Template</title>
+        <!--vendor css ================================================== -->
+        <link rel="stylesheet" type="text/css" href="css/vendor.css">
+        <!-- Link Swiper's CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+        <!--Bootstrap ================================================== -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        <!-- Style Sheet ================================================== -->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <!-- Google Fonts ================================================== -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=Oswald:wght@500;600;700&display=swap"
+            rel="stylesheet">
+        <!-- script ================================================== -->
+        <script src="js/modernizr.js"></script>
+    </head>
+    <body data-bs-spy="scroll" data-bs-target="#header-nav" tabindex="0">
+        <div id="loadingModal" class="modal" tabindex="-1" style="display:none;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Processing...</h5>
+                </div>
+                <div class="modal-body">
+                  <p>Please wait while we process your payment.</p>
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div id="errorModal" class="modal" tabindex="-1" style="display:none;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Message</h5>
+                </div>
+                <div class="modal-body">
+                  <p>Something went wrong. Please try again.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorModalLabel">Form Validation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Dynamic content will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <nav class="navbar fixed-top navbar-expand-lg container-fluid p-4">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html"><img src="images/main-logo-light.png" alt="logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                    aria-controls="offcanvasNavbar">
+                    <iconify-icon icon="system-uicons:menu-hamburger" class="hamburger-menu"></iconify-icon>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Menu</h5>
+                        <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul
+                            class="navbar-nav align-items-center justify-content-end justify-content-xxl-center flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link text-white text-uppercase  active mx-2 px-3 mb-2 mb-lg-0"
+                                    aria-current="page" href="#">home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white text-uppercase  mx-2 px-3 mb-2 mb-lg-0"
+                                    href="#about">about</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white text-uppercase  mx-2 px-3 mb-2 mb-lg-0"
+                                    href="#project">gallery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white text-uppercase  mx-2 px-3 mb-2 mb-lg-0" href="#book">Book Now</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white text-uppercase  mx-2 px-3 mb-2 mb-lg-0" href="#contact">Contact</a>
+                            </li>
+                        </ul>
+                        <div class="  d-flex mt-5 mt-lg-0 ps-lg-5 align-items-center justify-content-end ">
+                            <ul class="navbar-nav social-div justify-content-end align-items-center">
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center px-3" href="#">
+                                        <iconify-icon icon="ri:facebook-fill" class="social-icon text-white"></iconify-icon>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center px-3" href="#">
+                                        <iconify-icon icon="ri:instagram-line"
+                                            class="social-icon text-white"></iconify-icon>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center px-3" href="#">
+                                        <iconify-icon icon="ri:twitter-fill" class="social-icon text-white"></iconify-icon>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center px-3" href="#">
+                                        <iconify-icon icon="ri:linkedin-fill" class="social-icon text-white"></iconify-icon>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center px-3" href="#">
+                                        <iconify-icon icon="ri:youtube-fill" class="social-icon text-white"></iconify-icon>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <section id="hero" style="background-image:url(images/banner1-img.jpg);">
+            <div class="container padding-large">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3 text-center">
+                        <p class="header-top text-white mb-4">best car wash in the town</p>
+                        <h2 class="display-1 text-white mb-5">Turbo car wash</h2>
+                        <a href="#book" type="button" class="btn btn-outline-primary align-items-center ">
+                            Book Now
+                            <iconify-icon icon="tabler:arrow-right" class="arrow-icon"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="about">
+            <div style="overflow: hidden;">
+                <div class="container-fluid border-bottom" data-aos="zoom-out">
+                    <div class="container">
+                        <div class="row align-items-center ">
+                            <div class="col-md-6 padding-medium pe-5 border-end">
+                                <p class="header-top mb-3">Why choose us</p>
+                                <h2 class="display-4 ">always remember turbo to keep your car clean</h2>
+                            </div>
+                            <div class="col-md-6 padding-medium-2 ps-md-5">
+                                <p class="ms-md-5 ">Odio a faucibus cras lacus felis in enim. In tincidunt in tortor ligula
+                                    risus
+                                    nulla
+                                    blandit. Et augue sed urna nisi augue. Amet nisi iaculis suspendisse fermentum curabitur
+                                    feugiat. Velit sed ante in nisl amet sapien. Mauris a ullamcorper ut iaculis. Et massa
+                                    non
+                                    eu ac
+                                    tristique egestas consectetur.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="project" class="py-5" style="background-image:url(images/project-img.jpg);">
+            <div style="overflow: hidden;">
+                <div data-aos="zoom-out">
+                    <div class="container position-relative d-sm-flex py-5 mt-5 mb-2">
+                        <div>
+                            <p class="header-top mb-3">Gallery</p>
+                            <h2 class=" text-white display-4 ">Latest Projects</h2>
+                        </div>
+                        <div class="swiper-arrow position-absolute end-0 mt-sm-5 ms-3">
+                            <iconify-icon icon="teenyicons:arrow-left-solid" class="icon-arrow-left me-3"></iconify-icon>
+                            <iconify-icon icon="teenyicons:arrow-right-solid" class="icon-arrow-right"></iconify-icon>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="swiper project-swiper mb-4">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <a href="images/project1.jpg" title="Car Wash" class="image-link">
+                                            <img class="portfolio-img img-fluid" src="images/project1.jpg" alt="">
+                                            <div
+                                                class="description position-absolute top-50 start-50 translate-middle text-center p-3">
+                                                <p class="text-white">BMW Car</p>
+                                                <h3 class="text-white">External Hand Wash</h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <a href="images/project2.jpg" title="Car Wash" class="image-link">
+                                            <img class="portfolio-img img-fluid" src="images/project2.jpg" alt="">
+                                            <div
+                                                class="description position-absolute top-50 start-50 translate-middle text-center p-3">
+                                                <p class="text-white">BMW Car</p>
+                                                <h3 class="text-white">External Hand Wash</h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <a href="images/project3.jpg" title="Car Wash" class="image-link">
+                                            <img class="portfolio-img img-fluid" src="images/project3.jpg" alt="">
+                                            <div
+                                                class="description position-absolute top-50 start-50 translate-middle text-center p-3">
+                                                <p class="text-white">BMW Car</p>
+                                                <h3 class="text-white">External Hand Wash</h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <a href="images/project4.jpg" title="Car Wash" class="image-link">
+                                            <img class="portfolio-img img-fluid" src="images/project4.jpg" alt="">
+                                            <div
+                                                class="description position-absolute top-50 start-50 translate-middle text-center p-3">
+                                                <p class="text-white">BMW Car</p>
+                                                <h3 class="text-white">External Hand Wash</h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <a href="images/project1.jpg" title="Car Wash" class="image-link">
+                                            <img class="portfolio-img img-fluid" src="images/project1.jpg" alt="">
+                                            <div
+                                                class="description position-absolute top-50 start-50 translate-middle text-center p-3">
+                                                <p class="text-white">BMW Car</p>
+                                                <h3 class="text-white">External Hand Wash</h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <a href="images/project2.jpg" title="Car Wash" class="image-link">
+                                            <img class="portfolio-img img-fluid" src="images/project2.jpg" alt="">
+                                            <div
+                                                class="description position-absolute top-50 start-50 translate-middle text-center p-3">
+                                                <p class="text-white">BMW Car</p>
+                                                <h3 class="text-white">External Hand Wash</h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <a href="images/project3.jpg" title="Car Wash" class="image-link">
+                                            <img class="portfolio-img img-fluid" src="images/project3.jpg" alt="">
+                                            <div
+                                                class="description position-absolute top-50 start-50 translate-middle text-center p-3">
+                                                <p class="text-white">BMW Car</p>
+                                                <h3 class="text-white">External Hand Wash</h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <a href="images/project4.jpg" title="Car Wash" class="image-link">
+                                            <img class="portfolio-img img-fluid" src="images/project4.jpg" alt="">
+                                            <div
+                                                class="description position-absolute top-50 start-50 translate-middle text-center p-3">
+                                                <p class="text-white">BMW Car</p>
+                                                <h3 class="text-white">External Hand Wash</h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center pb-5 mb-5">
+                        <a href="#" class="btn btn-primary mt-5 ">
+                            Browse Projects
+                            <iconify-icon
+                                icon="tabler:arrow-right" class="arrow-icon"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="book" class="contact-us-wrap py-5 mt-4">
+            <div class="container">
+                <div class="row mt-3">
+                    <div class="inquiry-item offset-md-2 col-md-8">
+                        <h2 class="display-5 text-uppercase mb-4">Book Your Appointment</h2>
+                        <p>Book the appointment online.</p>
+                        <form id="form" class="form-group flex-wrap">
+                            <div class="col-lg-12 mb-3">
+                                <select id="vehicleType" class="form-select form-control" aria-label="Default select example">
+                                    <option selected="">Select Vehicle Type</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <select id="pricingPlan" class="form-select form-control" aria-label="Default select example">
+                                    <option selected="">Select Pricing Plan</option>
+                                </select>
+                            </div>
+                            <div class="form-input col-lg-12 d-flex mb-3">
+                                <div class="input-group date" id="datepicker">
+                                    <input type="date" id="start" name="appointment" value="" min="" max="" class="form-control ps-3 me-3" disabled>
+                                </div>
+                                <div class="input-group">
+                                    <input type="number" name="quality" id="quality" value="1" min="1" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-input col-lg-12 d-flex mb-3">
+                                <input type="text" name="name" placeholder="Name" class="form-control ps-3 me-3">
+                                <input type="tel" name="phone" id="phone" placeholder="Phone Number" class="form-control ps-3">
+                            </div>
+                            <input type="hidden" id="address"/>
+                            <div class="col-lg-12 mb-3">
+                                <div id="map-container" style="width: 100%; height: 400px; position: relative;">
+                                    <gmp-map id="map" style="width: 100%; height: 100%;" center="40.749933,-73.98633" zoom="13" map-id="DEMO_MAP_ID">
+                                      <div slot="control-block-start-inline-start" class="place-picker-container">
+                                        <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
+                                      </div>
+                                      <gmp-advanced-marker></gmp-advanced-marker><gmpx-api-loader key="AIzaSyD4kPoMG2aF6KXxSaecSjOYr0LH-LgFmjg" solution-channel="GMP_GE_mapsandplacesautocomplete_v2"></gmpx-api-loader>
+                                    </gmp-map>
+                                  </div>
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn btn-primary btn-lg text-uppercase btn-rounded-none">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact">
+            <div style="overflow: hidden;">
+                <div class="container" data-aos="zoom-out">
+                    <div class="row align-items-center ">
+                        <div class="col-md-4 text-center padding-medium border-end">
+                            <p class="header-top mb-4">Why choose us</p>
+                            <p class="mb-2">+123 222 333 44</p>
+                            <p class="mb-2">+123 666 777 88</p>
+                        </div>
+                        <div class="col-md-4 text-center padding-medium border-end">
+                            <p class="header-top mb-4">Working hours</p>
+                            <p class="mb-2">Mon - Fri: 6 am - 6 pm</p>
+                            <p class="mb-2">Sun - Sat: 9 am - 4 pm</p>
+                        </div>
+                        <div class="col-md-4 text-center padding-medium">
+                            <p class="header-top mb-4">Our address</p>
+                            <p class="mb-2">13 Rue Montmartre 75001, Paris, France</p>
+                            <p class="mb-2">13 Rue Martre 75001, Paris, France</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="footer">
+            <div class="container footer-containerG mt-5 mt-md-0 pt-3">
+                <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 my-5 py-5 ">
+                    <div class=" col-md-3 my-5 mt-md-0 ">
+                        <img src="images/logo-dark.png" alt="" class="">
+                        <p class="my-4">Velit sed ante in nisl amet sapien. Mauris a ullamcorper ut iaculis. Et massa non eu
+                            ac tristique assa non eu ac tristique.
+                        </p>
+                        <div class="d-flex align-items-center ">
+                            <a href="#" target="_blank">
+                                <iconify-icon class="social-icon-footer active pe-4"
+                                    icon="mdi:facebook"></iconify-icon>
+                            </a>
+                            <a href="#" target="_blank">
+                                <iconify-icon class="social-icon-footer pe-4"
+                                    icon="mdi:twitter"></iconify-icon>
+                            </a>
+                            <a href="#" target="_blank">
+                                <iconify-icon class="social-icon-footer pe-4"
+                                    icon="mdi:instagram"></iconify-icon>
+                            </a>
+                            <a href="#" target="_blank">
+                                <iconify-icon class="social-icon-footer pe-4"
+                                    icon="mdi:linkedin"></iconify-icon>
+                            </a>
+                            <a href="#" target="_blank">
+                                <iconify-icon class="social-icon-footer pe-4"
+                                    icon="mdi:youtube"></iconify-icon>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 offset-md-1">
+                        <h5 class="fs-5 mt-3 mt-md-0 mb-3">About us</h5>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item footer-list mb-3"><a href="#" class="nav-link text-uppercase p-0 ">About
+                                us</a>
+                            </li>
+                            <li class="nav-item footer-list mb-3"><a href="#" class="nav-link text-uppercase p-0 ">WHo are
+                                we</a>
+                            </li>
+                            <li class="nav-item footer-list mb-3"><a href="#" class="nav-link text-uppercase p-0 ">Why
+                                choose us</a>
+                            </li>
+                            <li class="nav-item footer-list mb-3"><a href="#" class="nav-link text-uppercase p-0 ">Our
+                                history</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2">
+                        <h5 class="fs-5 mt-3 mt-md-0 mb-3">Our services</h5>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item footer-list mb-3"><a href="#" class="nav-link text-uppercase p-0 ">Our
+                                history</a>
+                            </li>
+                            <li class="nav-item footer-list mb-3"><a href="#" class="nav-link text-uppercase p-0 ">Tiring
+                                dressing</a>
+                            </li>
+                            <li class="nav-item footer-list mb-3"><a href="#" class="nav-link text-uppercase p-0 ">Wheel
+                                shine</a>
+                            </li>
+                            <li class="nav-item footer-list mb-3"><a href="#" class="nav-link text-uppercase p-0 ">Interior
+                                vacuum</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 ">
+                        <h5 class="fs-5 mt-3 mt-md-0 mb-3">Contact us</h5>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item footer-list mb-3"><a href="#" class="nav-link text-uppercase p-0 ">Our
+                                location</a>
+                            </li>
+                            <li class="nav-item footer-list mb-3"><a href="#"
+                                class="nav-link text-uppercase p-0 ">Contact</a>
+                            </li>
+                            <li class="nav-item footer-list mb-3"><a href="#"
+                                class="nav-link text-uppercase p-0 ">Address</a>
+                            </li>
+                            <li class="nav-item footer-list mb-3"><a href="#"
+                                class="nav-link text-uppercase p-0 ">Facebook</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 ">
+                        <h5 class="fs-5 mt-3 mt-md-0 mb-3">More info</h5>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item footer-list mb-3"><a href="#"
+                                class="nav-link text-uppercase p-0 ">VEhicle</a>
+                            </li>
+                            <li class="nav-item footer-list mb-3"><a href="#" class="nav-link text-uppercase p-0 ">bike</a>
+                            </li>
+                            <li class="nav-item footer-list mb-3"><a href="#"
+                                class="nav-link text-uppercase p-0 ">Scooter</a>
+                            </li>
+                        </ul>
+                    </div>
+                </footer>
+            </div>
+            <footer class="d-flex flex-wrap justify-content-between align-items-center border-top"></footer>
+            <div class="container">
+                <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 pt-4">
+                    <div class="col-md-6 d-flex align-items-center">
+                        <p>© 2023 Turbo, Carwash | All Rights Reserved</p>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center justify-content-end">
+                        <p class="">© 2023 Designed By:<a href="https://templatesjungle.com/"
+                            class="website-link text-decoration-none" target="_blank"> <b>TemplatesJungle</b></a></p>
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <!-- script ================================================== -->
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
+        <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcqVbEqAAAAAH1KgZju7V7Vzexy9e2zSm69MMh4"></script>
+        <script type="module" src="https://ajax.googleapis.com/ajax/libs/@googlemaps/extended-component-library/0.6.11/index.min.js"></script>
+        <script src="js/custom.js"></script>
+    </body>
+</html>
+

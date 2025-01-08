@@ -16,7 +16,18 @@ def route(path, methods=['GET']):
     def decorator(f):
         f._route_path = path
         f._route_methods = methods
-        return f
+        def wrapper(request, *args, **kwargs):
+            response = f(request, *args, **kwargs)
+            if isinstance(response, tuple):
+                content, status_code = response
+                response = content
+            else:
+                status_code = 200
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+            response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+            return response, status_code
+        return wrapper
     return decorator
 
 def validate_recaptcha(action_name):

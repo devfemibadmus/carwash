@@ -1,3 +1,4 @@
 serviceAccountKey.json
 __pycache__
 gcp_key*
+.env

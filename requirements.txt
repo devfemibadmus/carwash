@@ -1,4 +1,5 @@
 flask
 stripe
+firebase-admin
 functions-framework
 google-cloud-firestore

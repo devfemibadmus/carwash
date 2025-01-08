@@ -115,7 +115,7 @@ function payNowBtn() {
         status: "pending",
         quantity: parseInt(document.getElementById('quality').value, 10),
         payment_id: "payment_789",
-        redirect_url: window.location.origin
+        redirect_url: window.location.href.split('#')[0]
     };
     grecaptcha.enterprise.ready(async () => {
         try {

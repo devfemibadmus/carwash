@@ -1,21 +1,23 @@
-import requests, os
 from functools import wraps
 from firebase_admin import auth
+import requests, os, json, uuid
 from google.cloud import firestore
-from flask import Blueprint, request, jsonify
+from datetime import datetime, timedelta
+from flask import jsonify
 
 db = firestore.Client()
-
-admin_bp = Blueprint('admin_bp', __name__)
-order_bp = Blueprint('order_bp', __name__)
-cartype_bp = Blueprint('cartype_bp', __name__)
-os.getenv('SAMPLE_ENV_VAR')
 
 stripe_api_key = os.getenv('STRIPE_API_KEY')
 endpoint_secret = os.getenv('ENDPOINT_SECRET')
 RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY')
 gcloud_client_id = os.getenv('GCLOUD_CLIENT_ID')
 
+def route(path, methods=['GET']):
+    def decorator(f):
+        f._route_path = path
+        f._route_methods = methods
+        return f
+    return decorator
 
 def validate_recaptcha(action_name):
     def decorator(f):
@@ -40,4 +42,34 @@ def validate_recaptcha(action_name):
             return f(*args, **kwargs)
         return wrapped
     return decorator
+
+class CustomSession:
+    def __init__(self):
+        self.sessions = {}
+
+    def _generate_session_id(self):
+        return str(uuid.uuid4())
+
+    def create_session(self, data, expires_in=3600):
+        session_id = self._generate_session_id()
+        expiration_time = datetime.utcnow() + timedelta(seconds=expires_in)
+        self.sessions[session_id] = {
+            'data': data,
+            'expires_at': expiration_time
+        }
+        return session_id
+
+    def get_session(self, session_id):
+        session = self.sessions.get(session_id)
+        if session and session['expires_at'] > datetime.utcnow():
+            return session['data']
+        return None
+
+    def delete_session(self, session_id):
+        if session_id in self.sessions:
+            del self.sessions[session_id]
+
+    def is_session_valid(self, session_id):
+        session = self.sessions.get(session_id)
+        return session and session['expires_at'] > datetime.utcnow()
 

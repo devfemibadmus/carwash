@@ -1,7 +1,6 @@
 import stripe
 from datetime import datetime
-from flask import request, jsonify
-from .helper import db, stripe_api_key, order_bp, validate_recaptcha
+from .helper import db, stripe_api_key, validate_recaptcha, jsonify, route
 
 stripe.api_key = stripe_api_key
 
@@ -69,9 +68,9 @@ class Order:
             "payment_id": self.payment_id
         }
 
-@order_bp.route('/order', methods=['POST'])
+@route('/order', methods=['POST'])
 @validate_recaptcha(action_name='ORDER')
-def create_order():
+def create_order(request):
     data = request.get_json()
     if not all(key in data for key in ['address', 'car_type_name', 'wash_type', 'quantity', 'redirect_url']):
         return jsonify({"error": "Missing required fields"}), 400
@@ -91,8 +90,8 @@ def create_order():
     doc_ref = db.collection('orders').add(order_data)
     return jsonify({"id": doc_ref[1].id, "amount": order_data["amount"], "quantity": order_data["quantity"], "total_amount": order_data["amount"]*order_data["quantity"], "payment_url": payment_url, "payment_id": payment_id, "address": order_data["address"]}), 201
 
-@order_bp.route('/order/<order_id>', methods=['GET'])
-def get_order(order_id):
+@route('/order/<order_id>', methods=['GET'])
+def get_order(order_id, request):
     order_ref = db.collection('orders').document(order_id)
     order_doc = order_ref.get()
     if not order_doc.exists:
@@ -104,8 +103,8 @@ def get_order(order_id):
         order_data['car_type'] = car_type_doc.to_dict()
     return jsonify(order_data), 200
 
-@order_bp.route('/order/<order_id>', methods=['DELETE'])
-def cancel_order(order_id):
+@route('/order/<order_id>', methods=['DELETE'])
+def cancel_order(order_id, request):
     order_ref = db.collection('orders').document(order_id)
     order = order_ref.get()
     if order.exists:
@@ -119,8 +118,8 @@ def cancel_order(order_id):
             return jsonify({"message": "Payment already made, cancellation not allowed"}), 400
     return jsonify({"error": "Order not found"}), 404
 
-@order_bp.route('/payment/webhook', methods=['POST'])
-def handle_payment_webhook():
+@route('/payment/webhook', methods=['POST'])
+def handle_payment_webhook(request):
     payload = request.get_data(as_text=True)
     sig_header = request.headers.get('Stripe-Signature')
     try:
@@ -137,8 +136,8 @@ def handle_payment_webhook():
         order_ref[0].reference.update({'payment_status': payment_status})
     return jsonify({"status": "completed"}), 200
 
-@order_bp.route('/payment/verify', methods=['GET'])
-def verify_payment():
+@route('/payment/verify', methods=['GET'])
+def verify_payment(request):
     session_id = request.args.get('session_id')
     if not session_id:
         return jsonify({"status": "failure", "message": "No session ID provided"}), 400

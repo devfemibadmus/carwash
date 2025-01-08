@@ -1,7 +1,13 @@
-from app import application
+from models import *
 import functions_framework
+from models.helper import route, jsonify
 
 @functions_framework.http
 def carwash(request):
-    with application.test_request_context(request.path, method=request.method):
-        return application.full_dispatch_request()
+    for func in globals().values():
+        if callable(func) and hasattr(func, '_route_path'):
+            if func._route_path == request.path and request.method in func._route_methods:
+                return func(request)
+    return jsonify({"error": "Route not found"}), 404
+
+

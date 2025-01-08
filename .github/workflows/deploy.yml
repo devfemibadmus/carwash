@@ -43,4 +43,9 @@ jobs:
             --runtime python310 \
             --trigger-http \
             --allow-unauthenticated \
-            --set-env-vars GOOGLE_APPLICATION_CREDENTIALS=gcp_key.json
+            --set-env-vars \
+              STRIPE_API_KEY=${{ secrets.STRIPE_API_KEY }} \
+              ENDPOINT_SECRET=${{ secrets.ENDPOINT_SECRET }} \
+              RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }} \
+              GCLOUD_CLIENT_ID=${{ secrets.GCLOUD_CLIENT_ID }} \
+              GOOGLE_APPLICATION_CREDENTIALS=gcp_key.json

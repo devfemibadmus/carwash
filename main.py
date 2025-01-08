@@ -23,7 +23,7 @@ def carwash(request):
                 response.headers['Access-Control-Allow-Methods'] = '*'
                 response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
                 return response, status_code
-    response = jsonify({"error": "Route not found"})
+    response = jsonify({"message": "This is a test mode. Below are the available routes:", "routes": [{"path": "/cartype", "method": "POST", "description": "Create a new car type."}, {"path": "/cartype", "method": "GET", "description": "Retrieve all car types."}, {"path": "/cartype", "method": "PUT", "description": "Update a car type."}, {"path": "/cartype", "method": "DELETE", "description": "Delete a car type."}, {"path": "/order", "method": "POST", "description": "Create a new order."}, {"path": "/orders", "method": "GET", "description": "Retrieve all orders."}, {"path": "/payment/verify", "method": "POST", "description": "Verify payment status."}]})
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'

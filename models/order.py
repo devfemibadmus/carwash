@@ -1,4 +1,5 @@
 import stripe
+from .admin import admin_only
 from datetime import datetime
 from .helper import db, stripe_api_key, validate_recaptcha, jsonify, route
 
@@ -103,6 +104,21 @@ def get_order(order_id, request):
         order_data['car_type'] = car_type_doc.to_dict()
     return jsonify(order_data), 200
 
+@route('/orders', methods=['GET'])
+@admin_only
+def get_orders(request):
+    orders_ref = db.collection('orders')
+    orders_docs = orders_ref.stream()
+    orders_data = []
+    for order_doc in orders_docs:
+        order_data = order_doc.to_dict()
+        car_type_ref = db.collection('car_types').document(order_data['car_type_name'])
+        car_type_doc = car_type_ref.get()
+        if car_type_doc.exists:
+            order_data['car_type'] = car_type_doc.to_dict()
+        orders_data.append(order_data)
+    return jsonify(orders_data), 200
+
 @route('/order/<order_id>', methods=['DELETE'])
 def cancel_order(order_id, request):
     order_ref = db.collection('orders').document(order_id)
@@ -135,7 +151,6 @@ def handle_payment_webhook(request):
     if order_ref:
         order_ref[0].reference.update({'payment_status': payment_status})
     return jsonify({"status": "completed"}), 200
-
 
 @route('/payment/verify', methods=['GET'])
 def verify_payment(request):

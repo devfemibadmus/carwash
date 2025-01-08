@@ -1,4 +1,4 @@
-var api_endpoint = "http://127.0.0.1:5000"
+var api_endpoint = "https://us-central1-dev-femi-badmus.cloudfunctions.net/carwash"
 
 // API fetch car types and load
 function loadCartype() {

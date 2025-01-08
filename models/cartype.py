@@ -18,7 +18,7 @@ class CarType:
 # CRUD for CarType
 @route('/cartype', methods=['POST'])
 @admin_only
-def create_cartype():
+def create_cartype(request):
     data = request.get_json()
     if db.collection('car_types').where('name', '==', data['name']).get():
         return jsonify({"error": "Name must be unique"}), 400
@@ -27,14 +27,14 @@ def create_cartype():
     return jsonify(doc_ref[1].get().to_dict()), 201
 
 @route('/cartype', methods=['GET'])
-def get_all_cartypes():
+def get_all_cartypes(request):
     cartypes = db.collection('car_types').stream()
     cartype_list = [cartype.to_dict() for cartype in cartypes]
     return jsonify(cartype_list), 200
 
 @route('/cartype/<cartype_name>', methods=['PUT'])
 @admin_only
-def update_cartype(cartype_name):
+def update_cartype(cartype_name, request):
     data = request.get_json()
     doc_ref = db.collection('car_types').where('name', '==', cartype_name).get()
     if not doc_ref:
@@ -49,7 +49,7 @@ def update_cartype(cartype_name):
 
 @route('/cartype/<cartype_name>', methods=['DELETE'])
 @admin_only
-def delete_cartype(cartype_name):
+def delete_cartype(cartype_name, request):
     doc_ref = db.collection('car_types').where('name', '==', cartype_name).get()
     if not doc_ref:
         return jsonify({"error": "CarType not found"}), 404

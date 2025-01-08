@@ -12,28 +12,17 @@ endpoint_secret = os.getenv('ENDPOINT_SECRET')
 RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY')
 gcloud_client_id = os.getenv('GCLOUD_CLIENT_ID')
 
-def route(path, methods=['GET']):
+def route(path, methods=['*']):
     def decorator(f):
         f._route_path = path
         f._route_methods = methods
-        def wrapper(request, *args, **kwargs):
-            response = f(request, *args, **kwargs)
-            if isinstance(response, tuple):
-                content, status_code = response
-                response = content
-            else:
-                status_code = 200
-            response.headers['Access-Control-Allow-Origin'] = '*'
-            response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-            response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-            return response, status_code
-        return wrapper
+        return f
     return decorator
 
 def validate_recaptcha(action_name):
     def decorator(f):
         @wraps(f)
-        def wrapped(*args, **kwargs):
+        def wrapped(request, *args, **kwargs):
             recaptcha_token = request.json.get('recaptcha_token')
             if not recaptcha_token:
                 return jsonify({"error": "Recaptcha token is missing"}), 400
@@ -50,7 +39,7 @@ def validate_recaptcha(action_name):
             result = response.json()
             if response.status_code != 200 or not result.get("tokenProperties", {}).get("valid", False) or result.get("tokenProperties", {}).get("action") != action_name or result.get("riskAnalysis", {}).get("score", 0) < 0.5:
                 return jsonify({"error": "Recaptcha validation failed"}), 403
-            return f(*args, **kwargs)
+            return f(request, *args, **kwargs)
         return wrapped
     return decorator
 

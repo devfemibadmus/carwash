@@ -34,7 +34,7 @@ jobs:
           credentials_json: ${{ secrets.GCP_KEY }}
 
       - name: Save GCP_KEY to file
-        run: echo "${{ secrets.GCP_KEY }}" > gcpkey.json
+        run: printf "%s" "${{ secrets.GCP_KEY }}" | base64 --decode > models/gcpkey.json
 
       - name: Deploy to Google Cloud Functions
         run: |

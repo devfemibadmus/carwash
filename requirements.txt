@@ -1,5 +1,6 @@
 flask
 stripe
+flask_cors
 firebase-admin
 functions-framework
 google-cloud-firestore
